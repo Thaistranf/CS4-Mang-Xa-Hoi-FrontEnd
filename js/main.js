@@ -68,7 +68,6 @@ $(window).on('load', function() {
 		variableWidth: true,
 		centerMode: true,
 		arrows: false,
-		asNavFor: '.hero-text-slider',
 		autoplay: true,
 		pauseOnHover:false,
 		autoplaySpeed: 3000,

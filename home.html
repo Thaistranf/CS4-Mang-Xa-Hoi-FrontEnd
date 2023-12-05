@@ -21,7 +21,6 @@
     <!-- Main Stylesheets -->
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet/less" href="css/login.css">
-    <script src="js/login/test.js"></script>
 
 
     <!--[if lt IE 9]>
@@ -37,150 +36,32 @@
     </div>
 
     <!-- Header Section -->
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-4 col-md-3 order-2 order-sm-1">
-                    <div class="header__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-md-6 order-1  order-md-2 text-center">
-                    <a href="./index.html" class="site-logo">
-                        <h3>Moments</h3>
-                    </a>
-                </div>
-                <div class="col-sm-4 col-md-3 order-3 order-sm-3">
-                    <div class="header__switches">
-                        <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
-                        <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
-                        <a href="javascript:" onclick="showFormLogin()"><i class="fa fa-user" aria-hidden="true">Admin</i></a>
-                    </div>
-                </div>
-            </div>
-            <nav class="main__menu">
-                <ul class="nav__menu">
-                    <li><a href="./index.html" class="menu--active">Home</a></li>
-                    <li><a href="./about.html">Information</a></li>
-                    <li><a href="./gallery.html">Gallery</a></li>
-                    <li><a href="./blog.html">Blog</a>
-                        <ul class="sub__menu">
-                            <li><a href="./blog-single.html">Blog Single</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="./contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <!-- Header Section end -->
 
-    <!-- Hero Section -->
-    <section class="hero__section">
-        <div class="hero-slider">
-            <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/1.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/1.jpg" alt="">
-                </a>
-            </div>
-            <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/2.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/2.jpg" alt="">
-                </a>
-            </div>
-            <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/3.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/3.jpg" alt="">
-                </a>
-            </div>
-            <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/4.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/4.jpg" alt="">
-                </a>
-            </div>
-            <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/5.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/5.jpg" alt="">
-                </a>
-            </div>
-            <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/6.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/6.jpg" alt="">
-                </a>
-            </div>
-            <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/7.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/7.jpg" alt="">
-                </a>
-            </div>
-        </div>
-        <div class="hero-text-slider">
-            <div class="text-item">
-                <h2>Nature</h2>
-                <p>Photography</p>
-            </div>
-            <div class="text-item">
-                <h2>Red Heartbeat</h2>
-                <p>Photography</p>
-            </div>
-            <div class="text-item">
-                <h2>Blue Dreem</h2>
-                <p>Photography</p>
-            </div>
-            <div class="text-item">
-                <h2>Christian Church</h2>
-                <p>Photography</p>
-            </div>
-            <div class="text-item">
-                <h2>Red Darkness</h2>
-                <p>Photography</p>
-            </div>
-            <div class="text-item">
-                <h2>Beauty with Brain</h2>
-                <p>Photography</p>
-            </div>
-            <div class="text-item">
-                <h2>Remarkable</h2>
-                <p>Photography</p>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section end -->
-
-    <!-- Footer Section -->
-
-    <!-- Footer Section end -->
-
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search End -->
-</div>
 <!-- Page Preloder -->
 
 <div id="login-modal">
 
 </div>
+
+<script src="js/home/home.js"></script>
+<script src="js/login/login.js"></script>
+<script src="js/home/profile.js"></script>
+<script src="js/home/gallery.js"></script>
+<script src="js/home/blog.js"></script>
 <!--====== Javascripts & Jquery ======-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js" integrity="sha256-mkdmXjMvBcpAyyFNCVdbwg4v+ycJho65QLDwVE3ViDs=" crossorigin="anonymous"></script>
 <script src="js/vendor/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/less" ></script>
 <script src="js/jquery.slicknav.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js" integrity="sha256-mkdmXjMvBcpAyyFNCVdbwg4v+ycJho65QLDwVE3ViDs=" crossorigin="anonymous"></script>
 <script src="js/slick.min.js"></script>
+
 <script src="js/fresco.min.js"></script>
 <script src="js/main.js"></script>
 <!--<script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>-->
 
 <!--=====My Js====-->
-<script src="js/login/login.js"></script>
+
+
 </body>
 </html>
