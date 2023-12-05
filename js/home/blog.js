@@ -20,7 +20,7 @@ function showBlog(){
           <div class="header__switches">
             <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
             <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
-             <a href="" onclick="showFormLogin()"><i class="fa fa-user" aria-hidden="true">Login</i></a>
+             <a href="javascript:" onclick="showFormLogin()"><i class="fa fa-user" aria-hidden="true">Login</i></a>
           </div>
         </div>
       </div>
