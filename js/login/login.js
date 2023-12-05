@@ -1,5 +1,5 @@
-function showFormLogin(){
-    document.getElementById("login-modal").innerHTML=`
+function showFormLogin() {
+    document.getElementById("login-modal").innerHTML = `
     <div class="modal" tabindex="-1" id="modal-login">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -104,6 +104,7 @@ function showFormLogin(){
   </div>
 </div>
     `
+
     var inP = $('.input-field');
 
     inP.on('blur', function () {
@@ -170,4 +171,33 @@ function showFormLogin(){
         });
     });
     $("#modal-login").modal("show")
+}
+
+function login() {
+    let username = document.getElementById("userName").value;
+    let password = document.getElementById("passWord").value;
+    let login = {
+        "username": username,
+        "password": password
+    }
+    axios.post("http://localhost:8081/login", login).then(function (res) {
+        console.log(res.data);
+    })
+}
+
+function register() {
+    let username = document.getElementById("userNameRs").value;
+    let password = document.getElementById("passWordRs").value;
+    let repassword = document.getElementById("repeatPassRs").value;
+    let email = document.getElementById("emailRs").value;
+    let register = {
+        "username": username,
+        "password": password,
+        "confirmPassword": repassword,
+        "email": email
+    }
+    console.log(register);
+    axios.post("http://localhost:8088/register", register).then(function (res) {
+        console.log(res.data);
+    })
 }
