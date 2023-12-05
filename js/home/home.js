@@ -4,7 +4,7 @@ function getAll(){
     document.getElementById("main").innerHTML=`
         <div id="preloder">
         <div class="loader"></div>
-    </div>
+        </div>
 
     <!-- Header Section -->
     <header class="header">
@@ -26,7 +26,7 @@ function getAll(){
                     <div class="header__switches">
                         <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
                         <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
-                        <a href="" onclick="showFormLogin()"><i class="fa fa-user" aria-hidden="true">Login</i></a>
+                        <a href="javascript:" onclick="showFormLogin()"><i class="fa fa-user" aria-hidden="true">Login</i></a>
                     </div>
                 </div>
             </div>
@@ -47,38 +47,38 @@ function getAll(){
     <section class="hero__section">
         <div class="hero-slider">
             <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/1.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/1.jpg" alt="">
+                <a class="fresco" href="/img/hero-slider/1.jpg" data-fresco-group="projects">
+                    <img src="/img/hero-slider/1.jpg" alt="">
                 </a>
             </div>
             <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/2.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/2.jpg" alt="">
+                <a class="fresco" href="/img/hero-slider/2.jpg" data-fresco-group="projects">
+                    <img src="/img/hero-slider/2.jpg" alt="">
                 </a>
             </div>
             <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/3.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/3.jpg" alt="">
+                <a class="fresco" href="/img/hero-slider/3.jpg" data-fresco-group="projects">
+                    <img src="/img/hero-slider/3.jpg" alt="">
                 </a>
             </div>
             <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/4.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/4.jpg" alt="">
+                <a class="fresco" href="/img/hero-slider/4.jpg" data-fresco-group="projects">
+                    <img src="/img/hero-slider/4.jpg" alt="">
                 </a>
             </div>
             <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/5.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/5.jpg" alt="">
+                <a class="fresco" href="/img/hero-slider/5.jpg" data-fresco-group="projects">
+                    <img src="/img/hero-slider/5.jpg" alt="">
                 </a>
             </div>
             <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/6.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/6.jpg" alt="">
+                <a class="fresco" href="/img/hero-slider/6.jpg" data-fresco-group="projects">
+                    <img src="/img/hero-slider/6.jpg" alt="">
                 </a>
             </div>
             <div class="slide-item">
-                <a class="fresco" href="img/hero-slider/7.jpg" data-fresco-group="projects">
-                    <img src="img/hero-slider/7.jpg" alt="">
+                <a class="fresco" href="/img/hero-slider/7.jpg" data-fresco-group="projects">
+                    <img src="/img/hero-slider/7.jpg" alt="">
                 </a>
             </div>
         </div>
