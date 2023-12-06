@@ -42,7 +42,7 @@ function showGallery(){
     <div class="gallery__warp">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+          <a  href="#" onclick="showPostDetail()" data-toggle="modal" data-target=".bd-example-modal-lg">
             <img src="/img/gallery/1.jpg" alt="">
           </a>
         </div>

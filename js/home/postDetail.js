@@ -5,7 +5,7 @@ function showPostDetail(){
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title"><i class="fa fa-picture-o" aria-hidden="true"></i>Image Name</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" onclick="closeModal()" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -34,7 +34,7 @@ function showPostDetail(){
             </div>    
             <br>
             <div>
-            <span>5 |<i class="fa fa-comments-o" aria-hidden="true"></i>Comment</span>
+            <span>2 |<i class="fa fa-comments-o" aria-hidden="true"></i>Comment</span>
             </div>
             <br>
             <div class="box-comment">
@@ -59,4 +59,7 @@ function showPostDetail(){
 </div>
     `
     $("#postDetail-modal").modal("show")
+}
+function closeModal(){
+    $("#postDetail-modal").modal("toggle")
 }
