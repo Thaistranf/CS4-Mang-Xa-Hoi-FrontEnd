@@ -1,5 +1,4 @@
 
-
 function getAll(){
     document.getElementById("main").innerHTML=`
         <div id="preloder">
@@ -36,7 +35,7 @@ function getAll(){
                     <li><a href="javascript:" onclick="showProfile()">Profile</a></li>
                     <li><a href="javascript:" onclick="showGallery()">Gallery</a></li>
                     <li><a href="javascript:" onclick="showBlog()">Blog</a></li>
-                    <li><a href="javascript:" onclick="">Topics</a></li>
+                    <li><a id="topics" href="javascript:" onclick="getTopics()">Topics</a></li>
                 </ul>
             </nav>
         </div>
@@ -44,7 +43,7 @@ function getAll(){
     <!-- Header Section end -->
 
     <!-- Hero Section -->
-    <section class="hero__section">
+    <section class="hero__section" id="body-main">
         <div class="hero-slider">
             <div class="slide-item">
                 <a class="fresco" href="/img/hero-slider/1.jpg" data-fresco-group="projects">
@@ -124,7 +123,17 @@ function getAll(){
         </div>
     </div>
     <!-- Search End -->
-
    `
 }
 getAll()
+
+
+let user = JSON.parse(localStorage.getItem('currentUser'));
+if (user) {
+    document.getElementById("loginIcon").innerHTML=`
+      <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
+      <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
+      <a href="javascript:" ><i class="fa fa-user" aria-hidden="true">${user.username}</i></a>
+      <a href="javascript:" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</i></a>
+    `
+}

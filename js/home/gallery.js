@@ -1,5 +1,6 @@
 function showGallery(){
-    document.getElementById("main").innerHTML=`
+    if (getUser()){
+        document.getElementById("main").innerHTML=`
 
     <!-- Header Section -->
   <header class="header">
@@ -18,10 +19,7 @@ function showGallery(){
         </a>
         </div>
         <div class="col-sm-4 col-md-3 order-3 order-sm-3">
-          <div class="header__switches">
-            <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
-            <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
-             <a href="javascript:" onclick="showFormLogin()"><i class="fa fa-user" aria-hidden="true">Login</i></a>
+          <div class="header__switches" id="loginIcon">
           </div>
         </div>
       </div>
@@ -31,7 +29,7 @@ function showGallery(){
           <li><a href="javascript:" onclick="showProfile()">Profile</a></li>
           <li><a href="javascript:" onclick="showGallery()" class="menu--active">Gallery</a></li>
           <li><a href="javascript:" onclick="showBlog()">Blog</a>
-          <li><a href="javascript:" onclick="">Topics</a></li>
+          <li><a id="topics" href="javascript:" onclick="getTopics()">Topics</a></li>
           </li>
         </ul>
       </nav>
@@ -40,7 +38,7 @@ function showGallery(){
   <!-- Header Section end -->
 
   <!-- About Page -->
-  <div class="gallery__page">
+  <div class="gallery__page" id="body-main">
     <div class="gallery__warp">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6">
@@ -119,4 +117,9 @@ function showGallery(){
   </div>
   <!-- Search End -->
     `
+        showIconLogin()
+    }
+    else {
+        showFormLogin()
+    }
 }

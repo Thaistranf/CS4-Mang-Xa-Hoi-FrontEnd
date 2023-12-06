@@ -184,12 +184,7 @@ function login() {
         console.log(res.data);
         localStorage.setItem("currentUser",JSON.stringify(res.data))
         $("#modal-login").modal("toggle")
-        document.getElementById("loginIcon").innerHTML=`
-      <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
-      <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
-      <a href="javascript:" ><i class="fa fa-user" aria-hidden="true">${getUser().username}</i></a>
-      <a href="javascript:" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</i></a>
-    `
+       showIconLogin()
     })
 }
 function logout() {
@@ -215,4 +210,17 @@ function register() {
 }
 function getUser(){
     return JSON.parse(localStorage.getItem("currentUser"))
+}
+function getToken() {
+    return  {
+        headers: {"Authorization": ` Bearer ${getUser().accessToken}`}
+    }
+}
+function showIconLogin(){
+    document.getElementById("loginIcon").innerHTML=`
+      <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
+      <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
+      <a href="javascript:" ><i class="fa fa-user" aria-hidden="true">${getUser().username}</i></a>
+      <a href="javascript:" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</i></a>
+    `
 }

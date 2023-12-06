@@ -1,10 +1,9 @@
-function getToken()  {
-    return {headers :{"Authorization" : ` Bearer ${getUser().accessToken}` }}
-}
-function showProfile(){
-    axios.get("http://localhost:8088/users/" + `${getUser().id}`,getToken()).then(function (res){
-        document.getElementById("main").innerHTML=`
 
+    function showProfile() {
+    if (getUser()){
+        axios.get("http://localhost:8088/users/" + `${getUser().id}`,getToken()).then(function (res){
+
+            document.getElementById("main").innerHTML = `
     <header class="header">
     <div class="container-fluid">
       <div class="row">
@@ -21,10 +20,7 @@ function showProfile(){
                     </a>
         </div>
         <div class="col-sm-4 col-md-3 order-3 order-sm-3">
-          <div class="header__switches">
-            <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
-            <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
-             <a href="javascript:" onclick="showFormLogin()"><i class="fa fa-user" aria-hidden="true">Login</i></a>
+          <div class="header__switches" id="loginIcon">
           </div>
         </div>
       </div>
@@ -33,8 +29,8 @@ function showProfile(){
           <li><a href="" onclick="getAll()">Home</a></li>
           <li><a href="javascript:" onclick="showProfile()" class="menu--active">Profile</a></li>
           <li><a href="javascript:" onclick="showGallery()">Gallery</a></li>
-          <li><a href="javascript:" onclick="showBlog()">Blog </a></li>
-          <li><a href="javascript:" onclick="">Topics</a></li>
+          <li><a href="javascript:" onclick="showBlog()">Blog</a></li>
+          <li><a id="topics" href="javascript:" onclick="getTopics()">Topics</a></li>
         </ul>
       </nav>
     </div>
@@ -42,7 +38,7 @@ function showProfile(){
   <!-- Header Section end -->
 
   <!-- About Page -->
-  <section class="about__page">
+  <section class="about__page" id="body-main">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-4">
@@ -90,7 +86,7 @@ function showProfile(){
             </div>
             <div class="single-progress-item">
               <h6>APP Design</h6>
-              <div class="progress-bar-style" data-progress="70"></div>
+              <div class="progress-bar-style" data-progress="100"></div>
             </div>
             <div class="single-progress-item">
               <h6>Graphic Design</h6>
@@ -118,7 +114,13 @@ function showProfile(){
   </div>
   <!-- Search End -->
     `
-    })
+            showIconLogin()
+
+        })
+    }
+    else {
+        showFormLogin()
+    }
 
 
 }
