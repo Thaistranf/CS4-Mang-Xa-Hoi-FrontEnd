@@ -1,8 +1,7 @@
-
-    function showProfile() {
-    if (getUser()){
-        axios.get("http://localhost:8088/users/" + `${getUser().id}`,getToken()).then(function (res){
-
+function showProfile() {
+    if (getUser()) {
+        axios.get("http://localhost:8088/users/" + `${getUser().id}`, getToken()).then(function (res) {
+            let user = res.data;
             document.getElementById("main").innerHTML = `
     <header class="header">
     <div class="container-fluid">
@@ -57,8 +56,8 @@
                 <p>PHOTOGRAPHER / DESIGNER</p>
               </div>
             </div>
-            <p>Date Of Birth</p>
-            <p>Email</p>
+            <p>DOB: <span>${user.dateOfBirth}</span></p>
+            <p>Email: <span>${user.email}</span></p>
             <br>
             <a href="#" onclick="showFormChangeProfile()"><i class="fa fa-cog" aria-hidden="true"></i>Change Profile </a>
             <br>
@@ -123,17 +122,17 @@
             showIconLogin()
 
         })
-    }
-    else {
+    } else {
         showFormLogin()
     }
 
 
 }
-    function showFormChangeProfile(){
 
-        console.log(user)
-        document.getElementById("login-modal").innerHTML=`
+async function showFormChangeProfile() {
+    let user = (await getDataUser()).data;
+    console.log(user)
+    document.getElementById("login-modal").innerHTML = `
     <div class="modal" tabindex="-1" role="dialog" id="changeProfile-modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -145,46 +144,45 @@
       </div>
       <div class="modal-body">
         <h5>UserName</h5>
-        <input type="text" value="${user.username}">
+        <input type="text" id="userName" value="${user.username}">
         <h6>Date Of Birth</h6>
         <input type="text" id="datepicker" value="${user.dateOfBirth}"/>
         <h5>Email</h5>
-        <input type="text" value="">
-        
+        <input type="text" id="email" value="${user.email}">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="saveChangeInformation()">Save changes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
     `
-        $("#changeProfile-modal").modal("show")
-        $(function(){
-            $('#datepicker').datepicker({
-                maxDate:new Date(),
-                changeYear:true,
-                changeMonth:true,
-                format:'dd/mm/yyyy'
-            });
-        })
-    }
+    $("#changeProfile-modal").modal("show")
+    $(function () {
+        $('#datepicker').datepicker({
+            maxDate: new Date(),
+            changeYear: true,
+            changeMonth: true,
+            format: 'dd/mm/yyyy'
+        });
+    })
+}
 
-    function saveChangeInformation(){
-        $("#changeProfile-modal").modal("toggle")
+function saveChangeInformation() {
+    let username = document.getElementById("userName").value;
+    let datepicker = document.getElementById("datepicker").value;
+    let email = document.getElementById("email").value;
+    let user = {
+        "username": username,
+        "email": email,
+        "dateOfBirth": datepicker
     }
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-                $('#imagePreview').hide();
-                $('#imagePreview').fadeIn(650);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $("#imageUpload").change(function() {
-        readURL(this);
-    });
+    $("#changeProfile-modal").modal("toggle")
+    axios.put("http://localhost:8088/users/" + getUser().id, user, getToken())
+    location.reload()
+}
+
+function getDataUser() {
+    return axios.get("http://localhost:8088/users/" + getUser().id, getToken());
+}

@@ -65,7 +65,7 @@ $(window).on('load', function() {
 		speed: 300,
 		slidesToShow: 1,
 		variableWidth: true,
-		centerMode: true,
+		//centerMode: true,
 		arrows: false,
 		autoplay: true,
 		pauseOnHover:false,
