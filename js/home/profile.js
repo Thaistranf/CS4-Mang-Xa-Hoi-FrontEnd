@@ -1,8 +1,7 @@
 
-    function showProfile() {
+function showProfile() {
     if (getUser()){
         axios.get("http://localhost:8088/users/" + `${getUser().id}`,getToken()).then(function (res){
-
             document.getElementById("main").innerHTML = `
     <header class="header">
     <div class="container-fluid">
@@ -62,17 +61,10 @@
         <div class="col-lg-4">
           <div class="experience__text">
             <h3 class="about__title">My Album</h3>
-            <div class="experience__item">
-              <div>Album1</div>
-              
-            </div>
-            <div class="experience__item">
-              
-              <div>Album2</div>
-            </div>
-            <div class="experience__item">
-              
-              <div>Album3</div>
+            <div class="experience__item" >
+              <div id="albumUser">
+                
+              </div>
             </div>
           </div>
         </div>
@@ -115,7 +107,26 @@
   <!-- Search End -->
     `
             showIconLogin()
+           axios.get("http://localhost:8088/album/" + getUser().id , getToken()).then(function (res){
+               let album = res.data
+               console.log(res.data)
 
+
+
+
+               // let html=``
+               // for (let i = 0; i < album.length; i++) {
+               //     html+=`<div class="albums">
+               //             <div class="album">${album[i].name}</div>
+               //             <div class="btn">
+               //             <div><button type="button" class="btn btn-outline-success">Edit</button></div>
+               //             <div><button type="button" class="btn btn-outline-danger">Delete</button></div>
+               //              </div>
+               //             </div>
+               //          `
+               // }
+               document.getElementById( "albumUser").innerHTML = html;
+           })
         })
     }
     else {
@@ -123,4 +134,7 @@
     }
 
 
+}
+function getAlbum(){
+    return axios.get("http://localhost:8088/album/" + getUser().id , getToken())
 }
