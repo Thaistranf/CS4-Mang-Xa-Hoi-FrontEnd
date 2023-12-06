@@ -1,0 +1,15 @@
+/* CSS để tạo hình tròn */
+.circle-icon {
+    width: 85px;
+    height: 30px;
+    background-color: #3498db; /* Màu của hình tròn, bạn có thể thay đổi */
+    border-radius: 20px; /* Làm cho hình tròn */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #fff; /* Màu chữ, bạn có thể thay đổi */
+    font-size: 18px; /* Kích thước chữ, bạn có thể thay đổi */
+}
