@@ -31,7 +31,7 @@ function showGallery(){
           <li><a href="javascript:" onclick="showProfile()">Profile</a></li>
           <li><a href="javascript:" onclick="showGallery()" class="menu--active">Gallery</a></li>
           <li><a href="javascript:" onclick="showBlog()">Blog</a>
-          <li><a href="javascript:" onclick="">Topics</a></li>
+          <li><a id="topics" href="javascript:" onclick="getTopics()">Topics</a></li>
           </li>
         </ul>
       </nav>
@@ -40,7 +40,7 @@ function showGallery(){
   <!-- Header Section end -->
 
   <!-- About Page -->
-  <div class="gallery__page">
+  <div class="gallery__page" id="body-main">
     <div class="gallery__warp">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6">

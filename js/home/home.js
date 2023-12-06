@@ -36,7 +36,7 @@ function getAll(){
                     <li><a href="javascript:" onclick="showProfile()">Profile</a></li>
                     <li><a href="javascript:" onclick="showGallery()">Gallery</a></li>
                     <li><a href="javascript:" onclick="showBlog()">Blog</a></li>
-                    <li><a href="javascript:" onclick="">Topics</a></li>
+                    <li><a id="topics" href="javascript:" onclick="getTopics()">Topics</a></li>
                 </ul>
             </nav>
         </div>
@@ -44,7 +44,7 @@ function getAll(){
     <!-- Header Section end -->
 
     <!-- Hero Section -->
-    <section class="hero__section">
+    <section class="hero__section" id="body-main">
         <div class="hero-slider">
             <div class="slide-item">
                 <a class="fresco" href="/img/hero-slider/1.jpg" data-fresco-group="projects">

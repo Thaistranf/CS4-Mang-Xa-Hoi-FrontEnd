@@ -30,7 +30,7 @@ function showProfile(){
           <li><a href="javascript:" onclick="showProfile()" class="menu--active">Profile</a></li>
           <li><a href="javascript:" onclick="showGallery()">Gallery</a></li>
           <li><a href="javascript:" onclick="showBlog()">Blog</a></li>
-          <li><a href="javascript:" onclick="">Topics</a></li>
+          <li><a id="topics" href="javascript:" onclick="getTopics()">Topics</a></li>
         </ul>
       </nav>
     </div>
@@ -38,7 +38,7 @@ function showProfile(){
   <!-- Header Section end -->
 
   <!-- About Page -->
-  <section class="about__page">
+  <section class="about__page" id="body-main">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-4">
@@ -86,7 +86,7 @@ function showProfile(){
             </div>
             <div class="single-progress-item">
               <h6>APP Design</h6>
-              <div class="progress-bar-style" data-progress="70"></div>
+              <div class="progress-bar-style" data-progress="100"></div>
             </div>
             <div class="single-progress-item">
               <h6>Graphic Design</h6>
