@@ -1,6 +1,9 @@
-function showProfile(){
-    document.getElementById("main").innerHTML=`
 
+    function showProfile() {
+    if (getUser()){
+        axios.get("http://localhost:8088/users/" + `${getUser().id}`,getToken()).then(function (res){
+
+            document.getElementById("main").innerHTML = `
     <header class="header">
     <div class="container-fluid">
       <div class="row">
@@ -17,10 +20,7 @@ function showProfile(){
                     </a>
         </div>
         <div class="col-sm-4 col-md-3 order-3 order-sm-3">
-          <div class="header__switches">
-            <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
-            <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
-             <a href="javascript:" onclick="showFormLogin()"><i class="fa fa-user" aria-hidden="true">Login</i></a>
+          <div class="header__switches" id="loginIcon">
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@ function showProfile(){
             <div class="about__meta">
               <img src="/img/profile.jpg" alt="">
               <div class="about__meta__info">
-                <h5>Caleb Rodriguez</h5>
+                <h5>${getUser().username}</h5>
                 <p>PHOTOGRAPHER / DESIGNER</p>
               </div>
             </div>
@@ -114,4 +114,13 @@ function showProfile(){
   </div>
   <!-- Search End -->
     `
+            showIconLogin()
+
+        })
+    }
+    else {
+        showFormLogin()
+    }
+
+
 }

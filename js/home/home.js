@@ -1,5 +1,4 @@
 
-
 function getAll(){
     document.getElementById("main").innerHTML=`
         <div id="preloder">
@@ -124,7 +123,17 @@ function getAll(){
         </div>
     </div>
     <!-- Search End -->
-
    `
 }
 getAll()
+
+
+let user = JSON.parse(localStorage.getItem('currentUser'));
+if (user) {
+    document.getElementById("loginIcon").innerHTML=`
+      <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
+      <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
+      <a href="javascript:" ><i class="fa fa-user" aria-hidden="true">${user.username}</i></a>
+      <a href="javascript:" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</i></a>
+    `
+}
