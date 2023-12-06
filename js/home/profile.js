@@ -54,7 +54,7 @@ function showProfile(){
             <p>Date Of Birth</p>
             <p>Email</p>
             <br>
-            <a href=""><i class="fa fa-cog" aria-hidden="true"></i>Change Profile </a>
+            <a href="#" onclick="showFormChangeProfile()"><i class="fa fa-cog" aria-hidden="true"></i>Change Profile </a>
             <br>
             <img src="/img/signature.png" alt="">
           </div>
@@ -113,5 +113,48 @@ function showProfile(){
     </div>
   </div>
   <!-- Search End -->
+  
     `
+}
+function showFormChangeProfile(){
+    document.getElementById("login-modal").innerHTML=`
+    <div class="modal" tabindex="-1" role="dialog" id="changeProfile-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Form Change Information</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>UserName</h5>
+        <input type="text">
+        <h6>Date Of Birth</h6>
+        <input type="text" id="datepicker"/>
+        <h5>Email</h5>
+        <input type="text">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    `
+    $("#changeProfile-modal").modal("show")
+    $(function(){
+        $('#datepicker').datepicker({
+            maxDate:new Date(),
+            changeYear:true,
+            changeMonth:true,
+            format:'dd/mm/yyyy'
+        });
+    })
+}
+
+function saveChangeInformation(){
+    $("#changeProfile-modal").modal("toggle")
 }
