@@ -1220,5 +1220,19 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 	background-size: contain;
 	object-fit: contain;
 }
+.box-comment{
+	border-top: 1px solid #595551;
+}
+
+body {
+	background: whitesmoke;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+	max-width: 960px;
+	margin: 30px auto;
+	padding: 20px;
+}
 
 
