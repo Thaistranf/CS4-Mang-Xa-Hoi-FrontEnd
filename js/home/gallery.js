@@ -123,3 +123,48 @@ function showGallery(){
         showFormLogin()
     }
 }
+
+function saveNewImage(){
+    let data = {
+        name: document.getElementById("name").value,
+        description: document.getElementById("description").value,
+        location: document.getElementById("location").value,
+        imageLink: document.getElementById("image").value
+    }
+    axios.post("http://localhost:8088/images/create", data).then(() => {
+        $("#addImageForm").modal("hide");
+        showGallery();
+    })
+}
+
+function uploadImage(e) {
+    let fbBucketName = 'images';
+    let uploader = document.getElementById('uploader');
+    let file = e.target.files[0];
+    let storageRef = firebase.storage().ref(`${fbBucketName}/${file.name}`);
+    let uploadTask = storageRef.put(file);
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        function (snapshot) {
+            uploader.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED:
+                    break;
+                case firebase.storage.TaskState.RUNNING:
+                    break;
+            }
+        }, function (error) {
+            switch (error.code) {
+                case 'storage/unauthorized':
+                    break;
+                case 'storage/canceled':
+                    break;
+                case 'storage/unknown':
+                    break;
+            }
+        }, function () {
+            let downloadURL = uploadTask.snapshot.downloadURL;
+            console.log(downloadURL)
+            document.getElementById('imgDiv').innerHTML = `<img src="${downloadURL}" alt="">`
+            document.getElementById("image").value = downloadURL;
+        });
+}
