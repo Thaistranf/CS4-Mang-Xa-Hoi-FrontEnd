@@ -1,6 +1,9 @@
-function showProfile(){
-    document.getElementById("main").innerHTML=`
 
+    function showProfile() {
+    if (getUser()){
+        axios.get("http://localhost:8088/users/" + `${getUser().id}`,getToken()).then(function (res){
+
+            document.getElementById("main").innerHTML = `
     <header class="header">
     <div class="container-fluid">
       <div class="row">
@@ -17,10 +20,7 @@ function showProfile(){
                     </a>
         </div>
         <div class="col-sm-4 col-md-3 order-3 order-sm-3">
-          <div class="header__switches">
-            <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
-            <a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
-             <a href="javascript:" onclick="showFormLogin()"><i class="fa fa-user" aria-hidden="true">Login</i></a>
+          <div class="header__switches" id="loginIcon">
           </div>
         </div>
       </div>
@@ -43,11 +43,17 @@ function showProfile(){
       <div class="row">
         <div class="col-lg-4">
           <div class="about__text">
-            <h3 class="about__title">Profile Me</h3>
-            <div class="about__meta">
-              <img src="/img/profile.jpg" alt="">
+            <h3 class="about__title">My Profile</h3>
+            <div class="about__meta avatar-upload">
+              <div class="avatar-preview"> 
+               <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);"></div>
+               </div>
+               <div class="avatar-edit">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                <label for="imageUpload"></label>
+            </div>
               <div class="about__meta__info">
-                <h5>Caleb Rodriguez</h5>
+                <h5>${getUser().username}</h5>
                 <p>PHOTOGRAPHER / DESIGNER</p>
               </div>
             </div>
@@ -113,11 +119,21 @@ function showProfile(){
     </div>
   </div>
   <!-- Search End -->
-  
     `
+            showIconLogin()
+
+        })
+    }
+    else {
+        showFormLogin()
+    }
+
+
 }
-function showFormChangeProfile(){
-    document.getElementById("login-modal").innerHTML=`
+    function showFormChangeProfile(){
+
+        console.log(user)
+        document.getElementById("login-modal").innerHTML=`
     <div class="modal" tabindex="-1" role="dialog" id="changeProfile-modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -129,11 +145,11 @@ function showFormChangeProfile(){
       </div>
       <div class="modal-body">
         <h5>UserName</h5>
-        <input type="text">
+        <input type="text" value="${user.username}">
         <h6>Date Of Birth</h6>
-        <input type="text" id="datepicker"/>
+        <input type="text" id="datepicker" value="${user.dateOfBirth}"/>
         <h5>Email</h5>
-        <input type="text">
+        <input type="text" value="">
         
       </div>
       <div class="modal-footer">
@@ -144,17 +160,31 @@ function showFormChangeProfile(){
   </div>
 </div>
     `
-    $("#changeProfile-modal").modal("show")
-    $(function(){
-        $('#datepicker').datepicker({
-            maxDate:new Date(),
-            changeYear:true,
-            changeMonth:true,
-            format:'dd/mm/yyyy'
-        });
-    })
-}
+        $("#changeProfile-modal").modal("show")
+        $(function(){
+            $('#datepicker').datepicker({
+                maxDate:new Date(),
+                changeYear:true,
+                changeMonth:true,
+                format:'dd/mm/yyyy'
+            });
+        })
+    }
 
-function saveChangeInformation(){
-    $("#changeProfile-modal").modal("toggle")
-}
+    function saveChangeInformation(){
+        $("#changeProfile-modal").modal("toggle")
+    }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                $('#imagePreview').hide();
+                $('#imagePreview').fadeIn(650);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imageUpload").change(function() {
+        readURL(this);
+    });
