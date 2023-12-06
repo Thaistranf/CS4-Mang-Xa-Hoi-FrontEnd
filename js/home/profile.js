@@ -1,5 +1,9 @@
+function getToken()  {
+    return {headers :{"Authorization" : ` Bearer ${getUser().accessToken}` }}
+}
 function showProfile(){
-    document.getElementById("main").innerHTML=`
+    axios.get("http://localhost:8088/users/" + `${getUser().id}`,getToken()).then(function (res){
+        document.getElementById("main").innerHTML=`
 
     <header class="header">
     <div class="container-fluid">
@@ -29,7 +33,7 @@ function showProfile(){
           <li><a href="" onclick="getAll()">Home</a></li>
           <li><a href="javascript:" onclick="showProfile()" class="menu--active">Profile</a></li>
           <li><a href="javascript:" onclick="showGallery()">Gallery</a></li>
-          <li><a href="javascript:" onclick="showBlog()">Blog</a></li>
+          <li><a href="javascript:" onclick="showBlog()">Blog </a></li>
           <li><a href="javascript:" onclick="">Topics</a></li>
         </ul>
       </nav>
@@ -47,7 +51,7 @@ function showProfile(){
             <div class="about__meta">
               <img src="/img/profile.jpg" alt="">
               <div class="about__meta__info">
-                <h5>Caleb Rodriguez</h5>
+                <h5>${getUser().username}</h5>
                 <p>PHOTOGRAPHER / DESIGNER</p>
               </div>
             </div>
@@ -114,4 +118,7 @@ function showProfile(){
   </div>
   <!-- Search End -->
     `
+    })
+
+
 }
