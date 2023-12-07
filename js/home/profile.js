@@ -46,10 +46,10 @@ function showProfile() {
             <h3 class="about__title"><i class="fa fa-user" aria-hidden="true"></i>My Profile</h3>
             <div class="about__meta avatar-upload">
               <div class="avatar-preview"> 
-               <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);"></div>
+               <div id="imagePreview" style="background-image: url(${user.imageUser});"></div>
             </div>
                <div class="avatar-edit">
-                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                <input type='button' id="imageUpload" onclick="showFormUpdateAvatar()" />
                 <label for="imageUpload"></label>
             </div>
               <div class="about__meta__info">
@@ -212,6 +212,72 @@ function readURL(input) {
         }
         reader.readAsDataURL(input.files[0]);
     }
+}
+function showFormUpdateAvatar(){
+document.getElementById("login-modal").innerHTML = `
+<div class="modal" tabindex="-1" role="dialog" id="modal-avatar">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change Avatar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type='file' id="imageUpload" onchange="uploadAvatar(event)"/>
+        <input type="hidden" id="imageAvatar" value="">
+        <div id="imgDivAvatar"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="editImage()">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>`
+    $("#modal-avatar").modal("show")
+}
+function editImage() {
+    let image = document.getElementById("imageAvatar").value;
+    let imageChange={
+        "imageUser":image
+    }
+    axios.put("http://localhost:8088/users/avatar/"+ getUser().id,imageChange,getToken())
+    $("#modal-avatar").modal("toggle")
+    location.reload();
+    showProfile()
+}
+function uploadAvatar(e) {
+    let fbBucketName = 'avatars';
+    let uploader = document.getElementById('uploader');
+    let file = e.target.files[0];
+    let storageRef = firebase.storage().ref(`${fbBucketName}/${file.name}`);
+    let uploadTask = storageRef.put(file);
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        function (snapshot) {
+            uploader.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED:
+                    break;
+                case firebase.storage.TaskState.RUNNING:
+                    break;
+            }
+        }, function (error) {
+            switch (error.code) {
+                case 'storage/unauthorized':
+                    break;
+                case 'storage/canceled':
+                    break;
+                case 'storage/unknown':
+                    break;
+            }
+        }, function () {
+            let downloadURL = uploadTask.snapshot.downloadURL;
+            console.log(downloadURL)
+            document.getElementById('imgDivAvatar').innerHTML = `<img src="${downloadURL}" alt="">`
+            document.getElementById("imageAvatar").value = downloadURL;
+        });
 }
 function showFormCreateAlbum(){
     document.getElementById("login-modal").innerHTML = `
