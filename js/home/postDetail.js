@@ -131,6 +131,74 @@ function showFormEditPost(){
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+        <section class="about__page" id="body-main">
+    <div class="container-fluid" id="showCategories2">
+      <div class="row">
+        <div class="col-lg-6">
+          <a class="gallery__item fresco" href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+            <img src="/img/gallery/1.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-3">
+            <div>
+            <h6><i class="fa fa-user-circle-o" aria-hidden="true"></i>Name Image</h6>
+            <input type="text" >
+            </div>
+        <br>        
+            <div>
+            <h6><i class="fa fa-align-center" aria-hidden="true"></i>Description</h6>
+            <input  type="text">
+            </div>
+            <div class="btn-categories">
+            <button onclick="showAllCategories2()"><span>Categories</span></button>
+            </div>
+            <br>
+            <div>
+            <span>2 |<i class="fa fa-comments-o" aria-hidden="true"></i>Comment</span>
+            </div>
+            <br>
+            <div class="box-comment">
+            <button class="close"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <a href="#"><i class="fa fa-user" aria-hidden="true"></i>hongdz </a>
+            <p> Hinh anh dep qua</p>
+            <button class="close"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <a href="#"><i class="fa fa-user" aria-hidden="true"></i>sangdz </a>
+            <p> I love you</p>
+            </div>
+          </div>
+        <div class="col-lg-2"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+
+    <button class="close">Save</button>
+</div>
+  
+  </section>
+      </div>
+    </div>
+  </div>
+  </div>
+    `
+    $("#postDetailEdit-modal").modal("show")
+}
+
+function closeModal(){
+    $("#postDetail-modal").modal("toggle")
+}
+function showFormEditPost(){
+    document.getElementById("postDetail-modal").innerHTML=`
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" id="postDetailEdit-modal">
+    <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><i class="fa fa-picture-o" aria-hidden="true"></i>Form Edit Image</h4>
+        
+        <button type="button" class="close" onclick="closeModal()" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
          <section class="about__page" id="body-main" >
     <div class="container-fluid " id="showCategories2"  >
       <div class="row">
