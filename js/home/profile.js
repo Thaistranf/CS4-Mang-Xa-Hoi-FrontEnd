@@ -43,8 +43,14 @@ function showProfile() {
         <div class="col-lg-4">
           <div class="about__text">
             <h3 class="about__title">My Profile</h3>
-            <div class="about__meta">
-              <img src="/img/profile.jpg" alt="">
+            <div class="about__meta avatar-upload">
+              <div class="avatar-preview"> 
+               <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);"></div>
+               </div>
+               <div class="avatar-edit">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                <label for="imageUpload"></label>
+            </div>
               <div class="about__meta__info">
                 <h5>${getUser().username}</h5>
                 <p>PHOTOGRAPHER / DESIGNER</p>
@@ -180,3 +186,17 @@ function saveChangeInformation() {
 function getDataUser() {
     return axios.get("http://localhost:8088/users/" + getUser().id, getToken());
 }
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#imageUpload").change(function() {
+    readURL(this);
+});
