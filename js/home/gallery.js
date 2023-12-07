@@ -1,12 +1,12 @@
 function showGallery(){
     if (getUser()){
-        axios.get("http://localhost:8088/images/" + `${getUser().id}`, getToken()).then(res => {
-            let dataList = res.data;
-            console.log(dataList)
+        axios.get("http://localhost:8088/images/" + getUser().id, getToken()).then(res => {
+            let dataListImage = res.data;
+            // console.log(dataListImage)
 
-            let str = `
-              <!-- Header Section -->
-              <header class="header">
+
+                let html = `
+                 <header class="header">
                 <div class="container-fluid">
                   <div class="row">
                     <div class="col-sm-4 col-md-3 order-2 order-sm-1">
@@ -38,26 +38,24 @@ function showGallery(){
                   </nav>
                 </div>
               </header>
-              <!-- Header Section end -->
-            
-              <!-- About Page -->
+               <!-- About Page -->
               <div class="gallery__page" id="body-main">
                 <div style="margin-bottom: 20px">
-                    <button type="button" class="circle-icon" data-toggle="modal" data-target="#addImageForm">➕ Add</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="showFormAddNewImage()">Add</button>
                 </div>
                 <div class="gallery__warp">
                   <div class="row">`
 
-            for (let i = 0; i < dataList.length; i++) {
-                str += `
+                for (let i = 0; i < dataListImage.length; i++) {
+                    html += `
                  <div class="col-lg-3 col-md-4 col-sm-6">
-                      <a class="gallery__item fresco" href="${dataList[i].imageLink}" data-fresco-group="gallery">
-                        <img src="${dataList[i].imageLink}" alt="">
+                      <a onclick="showPostDetail(${dataListImage[i].id})"  href="javascript:" data-fresco-group="gallery" class="gallery-item">
+                        <img src="${dataListImage[i].imageLink}" alt="">
                       </a>
                  </div>`
-            }
+                }
 
-            str += `
+                html += `
                 </div>
                     </div>
                   </div>
@@ -73,30 +71,46 @@ function showGallery(){
                     </div>
                   </div>
                   <!-- Search End -->`
-            document.getElementById("main").innerHTML= str;
+                document.getElementById("main").innerHTML = html
+                showIconLogin()
+            })
 
-            // Add Image Form
-            str += `
-                <div class="modal fade" tabindex="-1" id="addImageForm" aria-labelledby="addImageFormLabel" aria-hidden="true">
-                  <div class="modal-dialog">
+    }
+    else {
+        showFormLogin()
+    }
+}
+function showFormAddNewImage(){
+    if (getUser()){
+        axios.get("http://localhost:8088/categories", getToken()).then(res => {
+            let dataListCategory = res.data;
+            let str=`
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal-gallery">
+                  <div class="modal-dialog modal-lg">
                     <div class="modal-content">                
                       <!--Modal header-->
                       <div class="modal-header">
-                        <h5 class="modal-title" id="addImageFormLabel">New Image</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
+                        <h5 class="modal-title" id="addImageFormLabel"><i class="fa fa-picture-o" aria-hidden="true"></i>New Image</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                          <i class="fa fa-window-close" aria-hidden="true"></i>
                         </button>
                       </div>              
                       <!--Modal body-->
                       <div class="modal-body"> 
-                          <table>
-                              <tr style="margin-right: 20px">
-                                  <td>
-                                        <!--Hiển thị ảnh để xem trước-->
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInput1">Image</label>
+                                        <input type="file" id="fileButton" onchange="uploadImage(event)">
+                                    </div>
+                                    <!--Hiển thị ảnh để xem trước-->
                                         <div id="imgDiv"></div>
-                                  </td>
-                                  <td>
-                                          <div class="form-group">
+                                </div>
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-5">
+                                        <input type="hidden" class="form-control" id="idImage" aria-describedby="emailHelp">
+                                        <div class="form-group">
                                             <label for="exampleInput1">Name</label>
                                             <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">            
                                           </div>
@@ -104,46 +118,45 @@ function showGallery(){
                                             <label for="exampleInput1">Description</label>
                                             <input type="text" class="form-control" id="description" aria-describedby="emailHelp" placeholder="Description">            
                                           </div>
-                                           <div class="form-group">
+                                          <div class="form-group">
                                             <label for="exampleInput1">Location</label>
                                             <input type="text" class="form-control" id="location" aria-describedby="emailHelp" placeholder="Location">            
                                           </div>
                                           <div class="form-group">
-                                            <label for="exampleInput1">Image</label>
-                                            <input type="file" id="fileButton" onchange="uploadImage(event)">
-                                          </div>  
+                                            <label for="exampleInput1">Category</label><br>`
+
+
+            for (let i = 0; i < dataListCategory.length; i++) {
+                str += `<input type="checkbox" value="${dataListCategory[i].id}"> ${dataListCategory[i].name}`
+
+            }
+
+            str += `</div>
                                           <div class="form-group">
                                              <!--Giá trị (Link ảnh) sẽ vào đây-->
                                              <input type="hidden" id="image" value="">          
                                           </div>
-                                  </td>
-                          </table>
-                            
-                           
-                                    
-                          
-                          
-
-
-                        
-                                        
+                                </div>
+                            </div>
+                        </div>
+   
                       <!--Modal footer-->
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Close</button>
                         <button type="button" class="btn btn-primary" onclick="saveNewImage()">Save</button>
                       </div>
                     </div>
                   </div>
                 </div>`
-
-            document.getElementById("main").innerHTML = str;
-            // $("#addImageForm").modal("show")
+            document.getElementById("login-modal").innerHTML=str
+            $("#modal-gallery").modal("show");
         })
         showIconLogin()
     }
     else {
         showFormLogin()
     }
+
 }
 
 function saveNewImage(){
@@ -157,7 +170,8 @@ function saveNewImage(){
         }
     }
     axios.post("http://localhost:8088/images/create", data).then(() => {
-        $("#addImageForm").modal("hide");
+        console.log(data)
+        $("#modal-gallery").modal("toggle");
         showGallery();
     })
 }
@@ -192,4 +206,8 @@ function uploadImage(e) {
             document.getElementById('imgDiv').innerHTML = `<img src="${downloadURL}" alt="">`
             document.getElementById("image").value = downloadURL;
         });
+}
+
+function closeModal(){
+    $("#modal-gallery").modal("hide")
 }
