@@ -68,16 +68,10 @@ function showProfile() {
         <div class="col-lg-3">
           <div class="experience__text">
             <h3 class="about__title"><i class="fa fa-picture-o" aria-hidden="true"></i>My Album</h3>
+            <button type="button" class="btn btn-outline-info" style="height: 30px;font-size: 10px" onclick="showFormCreateAlbum()" >Add++</button>           
             <div class="experience">
-              <ul>
-                  <li>
-                    <a href="#">
-                      <figure>
-                        <img src='https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzNDA0OTI3Nw&ixlib=rb-1.2.1&q=80&w=400' alt='Volcano and lava field against a stormy sky'>
-                        <figcaption>Mountains and volcanos</figcaption>
-                      </figure>
-                    </a>
-                  </li>
+              <ul id="album">
+                 
               </ul>
              </div>
           </div>
@@ -123,11 +117,20 @@ function showProfile() {
     `
             showIconLogin()
            axios.get("http://localhost:8088/album/" + getUser().id , getToken()).then(function (res){
+               let html= ``;
                let album = res.data
-
-               console.log(res.data)
-
-
+               for (let i = 0; i < album.length; i++) {
+                   html+= `
+                    <li>
+                    <a href="#">
+                      <figure>
+                        <img src='https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzNDA0OTI3Nw&ixlib=rb-1.2.1&q=80&w=400' alt='Volcano and lava field against a stormy sky'>
+                        <figcaption onclick="getAll()">${album[i].name}</figcaption>
+                      </figure>
+                    </a>
+                     </li>`
+               }
+               document.getElementById("album").innerHTML = html;
         })
         })
     } else {
@@ -210,4 +213,41 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+function showFormCreateAlbum(){
+    document.getElementById("login-modal").innerHTML = `
+    <div class="modal" tabindex="-1" role="dialog" id="changeProfile-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Form Create Album</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>NameAlbum</h5>
+        <input type="text" id="AlbumName">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="saveAlbum()">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>`
+    $("#changeProfile-modal").modal("show")
+}
+function saveAlbum(){
+    let nameAlbum = document.getElementById("AlbumName").value
 
+    let album = {
+        name:nameAlbum,
+        user:{
+            id:getUser().id
+        }
+    }
+    axios.post("http://localhost:8088/album" ,album,getToken()).then(function (res){
+        location.reload()
+
+    })
+}
