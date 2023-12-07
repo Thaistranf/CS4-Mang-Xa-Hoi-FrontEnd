@@ -125,11 +125,14 @@ function showProfile() {
                     <a href="#">
                       <figure>
                         <img src='https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzNDA0OTI3Nw&ixlib=rb-1.2.1&q=80&w=400' alt='Volcano and lava field against a stormy sky'>
-                        <figcaption onclick="getAll()">${album[i].name}</figcaption>
+                        <figcaption onclick="">${album[i].name}</figcaption>
                       </figure>
                     </a>
-                     </li>`
+                    <button type="button" class="btn btn-outline-success" style="height: 30px;font-size: 10px" onclick="showFormUpdateAlbum(${album[i].id})">Update</button>
+                    <button type="button" class="btn btn-outline-danger" style="height: 30px;font-size: 10px">Delete</button>
+                    </li>`
                }
+
                document.getElementById("album").innerHTML = html;
         })
         })
@@ -220,7 +223,7 @@ document.getElementById("login-modal").innerHTML = `
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Change Avatar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -231,7 +234,7 @@ document.getElementById("login-modal").innerHTML = `
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="editImage()">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -286,7 +289,7 @@ function showFormCreateAlbum(){
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Form Create Album</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -296,7 +299,7 @@ function showFormCreateAlbum(){
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="saveAlbum()">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -315,5 +318,45 @@ function saveAlbum(){
     axios.post("http://localhost:8088/album" ,album,getToken()).then(function (res){
         location.reload()
 
+    })
+}
+function showFormUpdateAlbum(id){
+    axios.get("http://localhost:8088/album/findByID/" + id ,getToken()).then(function (res){
+        let album = res.data;
+        console.log(album)
+        document.getElementById("login-modal").innerHTML = `
+    <div class="modal" tabindex="-1" role="dialog" id="UpdateAlbum-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Form Update Album</h4>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>NameAlbum</h5>
+        <input type="text" id="AlbumName" value="${album.name}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="Update(${album.id})">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>`
+        $("#UpdateAlbum-modal").modal("show")
+    })
+}
+function Update(id){
+    let name = document.getElementById("AlbumName").value
+    let newAlbum = {
+        name: name,
+        user: {
+            id: getUser().id
+        }
+    }
+    axios.put("http://localhost:8088/album/" +id ,newAlbum,getToken()).then(function (res){
+        location.reload()
     })
 }
