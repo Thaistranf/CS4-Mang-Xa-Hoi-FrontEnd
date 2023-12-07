@@ -49,7 +49,7 @@ function showGallery(){
                 for (let i = 0; i < dataListImage.length; i++) {
                     html += `
                  <div class="col-lg-3 col-md-4 col-sm-6">
-                      <a onclick="showPostDetail()"  href="javascript:" data-fresco-group="gallery" class="gallery-item">
+                      <a onclick="showPostDetail(${dataListImage[i].id})"  href="javascript:" data-fresco-group="gallery" class="gallery-item">
                         <img src="${dataListImage[i].imageLink}" alt="">
                       </a>
                  </div>`
