@@ -5,7 +5,8 @@ function showPostDetail(){
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title"><i class="fa fa-picture-o" aria-hidden="true"></i>Image Name</h4>
-        <button type="button" class="close" onclick="closeModal()" data-dismiss="modal" aria-label="Close">
+        
+        <button type="button" class="close" onclick="closeModal()" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -49,9 +50,15 @@ function showPostDetail(){
             <button class="btn btn-outline-success" type="button"><i class="fa fa-share" aria-hidden="true"></i>Send</button>
             </div>
           </div>
+          </div>
         <div class="col-lg-2"></div>
       </div>
     </div>
+    <div class="modal-footer">
+    <button class="close"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+        <button class="close"><i class="fa fa-trash" aria-hidden="true"></i></button>
+</div>
+  
   </section>
       </div>
     </div>
