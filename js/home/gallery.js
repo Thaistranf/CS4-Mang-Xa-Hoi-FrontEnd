@@ -48,7 +48,7 @@ function showGallery(){
 
                 for (let i = 0; i < dataListImage.length; i++) {
                     html += `
-                 <div class="col-lg-3 col-md-4 col-sm-6">
+                 <div class="col-lg-3 col-md-4 col-sm-6 shrink">
                       <a onclick="showPostDetail()"  href="javascript:" data-fresco-group="gallery" class="gallery-item">
                         <img src="${dataListImage[i].imageLink}" alt="">
                       </a>
@@ -118,8 +118,8 @@ function showFormAddNewImage(){
                                             <label for="exampleInput1">Location</label>
                                             <input type="text" class="form-control" id="location" aria-describedby="emailHelp" placeholder="Location">            
                                           </div>
-                                          <div class="form-group">
-                                           <button onclick="showAllCategories()">Categories</button>
+                                          <div class="btn-categories">
+                                           <button onclick="showAllCategories()"><span>Categories</span></button>
         
                                           </div>
                                           <div class="form-group">
@@ -263,8 +263,8 @@ function backModal(){
                                             <label for="exampleInput1">Location</label>
                                             <input type="text" class="form-control" id="location" aria-describedby="emailHelp" placeholder="Location" value="${data.location}">            
                                           </div>
-                                          <div class="form-group">
-                                           <button onclick="showAllCategories()">Categories</button>
+                                          <div class="btn-categories">
+                                           <button onclick="showAllCategories()"><span>Categories</span></button>
         
                                           </div>
                                           <div class="form-group">
