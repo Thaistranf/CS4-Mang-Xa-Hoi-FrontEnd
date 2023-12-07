@@ -128,7 +128,7 @@ function showProfile() {
                         <figcaption onclick="">${album[i].name}</figcaption>
                       </figure>
                     </a>
-                    <button type="button" class="btn btn-outline-success" style="height: 30px;font-size: 10px" onclick="">Update</button>
+                    <button type="button" class="btn btn-outline-success" style="height: 30px;font-size: 10px" onclick="showFormUpdateAlbum(${album[i].id})">Update</button>
                     <button type="button" class="btn btn-outline-danger" style="height: 30px;font-size: 10px">Delete</button>
                     </li>`
                }
@@ -318,5 +318,45 @@ function saveAlbum(){
     axios.post("http://localhost:8088/album" ,album,getToken()).then(function (res){
         location.reload()
 
+    })
+}
+function showFormUpdateAlbum(id){
+    axios.get("http://localhost:8088/album/findByID/" + id ,getToken()).then(function (res){
+        let album = res.data;
+        console.log(album)
+        document.getElementById("login-modal").innerHTML = `
+    <div class="modal" tabindex="-1" role="dialog" id="UpdateAlbum-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Form Update Album</h4>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>NameAlbum</h5>
+        <input type="text" id="AlbumName" value="${album.name}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="Update(${album.id})">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>`
+        $("#UpdateAlbum-modal").modal("show")
+    })
+}
+function Update(id){
+    let name = document.getElementById("AlbumName").value
+    let newAlbum = {
+        name: name,
+        user: {
+            id: getUser().id
+        }
+    }
+    axios.put("http://localhost:8088/album/" +id ,newAlbum,getToken()).then(function (res){
+        location.reload()
     })
 }
