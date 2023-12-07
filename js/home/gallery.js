@@ -1,127 +1,145 @@
 function showGallery(){
     if (getUser()){
-        document.getElementById("main").innerHTML=`
+        axios.get("http://localhost:8088/images/" + `${getUser().id}`, getToken()).then(res => {
+            let dataListImage = res.data;
+            // console.log(dataListImage)
+            axios.get("http://localhost:8088/categories", getToken()).then(res => {
+                let dataListCategory = res.data;
+                let html = `
+                 <header class="header">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-sm-4 col-md-3 order-2 order-sm-1">
+                      <div class="header__social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 col-md-6 order-1  order-md-2 text-center">
+                    <a href="" class="site-logo">
+                    <h3>Moments</h3>
+                    </a>
+                    </div>
+                    <div class="col-sm-4 col-md-3 order-3 order-sm-3">
+                      <div class="header__switches" id="loginIcon">
+                      </div>
+                    </div>
+                  </div>
+                  <nav class="main__menu">
+                    <ul class="nav__menu">
+                      <li><a href="" onclick="getAll()">Home</a></li>
+                      <li><a href="javascript:" onclick="showProfile()">Profile</a></li>
+                      <li><a href="javascript:" onclick="showGallery()" class="menu--active">Gallery</a></li>
+                      <li><a href="javascript:" onclick="showBlog()">Blog</a>
+                      <li><a id="topics" href="javascript:" onclick="getTopics()">Topics</a></li>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </header>
+               <!-- About Page -->
+              <div class="gallery__page" id="body-main">
+                <div style="margin-bottom: 20px">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="showFormAddNewImage()">Add</button>
+                </div>
+                <div class="gallery__warp">
+                  <div class="row">`
 
-    <!-- Header Section -->
-  <header class="header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-4 col-md-3 order-2 order-sm-1">
-          <div class="header__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
-          </div>
-        </div>
-        <div class="col-sm-4 col-md-6 order-1  order-md-2 text-center">
-        <a href="" class="site-logo">
-        <h3>Moments</h3>
-        </a>
-        </div>
-        <div class="col-sm-4 col-md-3 order-3 order-sm-3">
-          <div class="header__switches" id="loginIcon">
-          </div>
-        </div>
-      </div>
-      <nav class="main__menu">
-        <ul class="nav__menu">
-          <li><a href="" onclick="getAll()">Home</a></li>
-          <li><a href="javascript:" onclick="showProfile()">Profile</a></li>
-          <li><a href="javascript:" onclick="showGallery()" class="menu--active">Gallery</a></li>
-          <li><a href="javascript:" onclick="showBlog()">Blog</a>
-          <li><a id="topics" href="javascript:" onclick="getTopics()">Topics</a></li>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <!-- Header Section end -->
+                for (let i = 0; i < dataListImage.length; i++) {
+                    html += `
+                 <div class="col-lg-3 col-md-4 col-sm-6">
+                      <a onclick="showPostDetail()"  href="javascript:" data-fresco-group="gallery" class="gallery-item">
+                        <img src="${dataListImage[i].imageLink}" alt="">
+                      </a>
+                 </div>`
+                }
 
-  <!-- About Page -->
-  <div class="gallery__page" id="body-main">
-    <div class="gallery__warp">
-      <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a  href="#" onclick="showPostDetail()" data-toggle="modal" data-target=".bd-example-modal-lg">
-            <img src="/img/gallery/1.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/2.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/2.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/3.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/3.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/4.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/4.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/5.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/5.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/6.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/6.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/7.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/7.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/8.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/8.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/9.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/9.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/10.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/10.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/11.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/11.jpg" alt="">
-          </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <a class="gallery__item fresco" href="/img/gallery/12.jpg" data-fresco-group="gallery">
-            <img src="/img/gallery/12.jpg" alt="">
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- About Page end -->
-
-  <!-- Search Begin -->
-  <div class="search-model">
-    <div class="h-100 d-flex align-items-center justify-content-center">
-      <div class="search-close-switch">+</div>
-      <form class="search-model-form">
-        <input type="text" id="search-input" placeholder="Search here.....">
-      </form>
-    </div>
-  </div>
-  <!-- Search End -->
-    `
-        showIconLogin()
+                html += `
+                </div>
+                    </div>
+                  </div>
+                  <!-- About Page end -->
+                
+                  <!-- Search Begin -->
+                  <div class="search-model">
+                    <div class="h-100 d-flex align-items-center justify-content-center">
+                      <div class="search-close-switch">+</div>
+                      <form class="search-model-form">
+                        <input type="text" id="search-input" placeholder="Search here.....">
+                      </form>
+                    </div>
+                  </div>
+                  <!-- Search End -->`
+                document.getElementById("main").innerHTML = html
+                showIconLogin()
+            })
+        })
     }
     else {
         showFormLogin()
     }
+}
+function showFormAddNewImage(){
+    let str = `
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal-gallery">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">                
+                      <!--Modal header-->
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="addImageFormLabel"><i class="fa fa-picture-o" aria-hidden="true"></i>New Image</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                          <i class="fa fa-window-close" aria-hidden="true"></i>
+                        </button>
+                      </div>              
+                      <!--Modal body-->
+                      <div class="modal-body"> 
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInput1">Image</label>
+                                        <input type="file" id="fileButton" onchange="uploadImage(event)">
+                                    </div>
+                                    <!--Hiển thị ảnh để xem trước-->
+                                        <div id="imgDiv"></div>
+                                </div>
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label for="exampleInput1">Name</label>
+                                            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">            
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="exampleInput1">Description</label>
+                                            <input type="text" class="form-control" id="description" aria-describedby="emailHelp" placeholder="Description">            
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="exampleInput1">Location</label>
+                                            <input type="text" class="form-control" id="location" aria-describedby="emailHelp" placeholder="Location">            
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="exampleInput1">Category</label>
+        
+                                </div>
+                                          <div class="form-group">
+                                             <!--Giá trị (Link ảnh) sẽ vào đây-->
+                                             <input type="hidden" id="image" value="">          
+                                          </div>
+                                </div>
+                            </div>
+                        </div>
+   
+                      <!--Modal footer-->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="saveNewImage()">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>`
+    document.getElementById("login-modal").innerHTML=str
+    $("#modal-gallery").modal("show");
 }
 
 function saveNewImage(){
@@ -129,10 +147,14 @@ function saveNewImage(){
         name: document.getElementById("name").value,
         description: document.getElementById("description").value,
         location: document.getElementById("location").value,
-        imageLink: document.getElementById("image").value
+        imageLink: document.getElementById("image").value,
+        user: {
+            id: getUser().id
+        }
     }
     axios.post("http://localhost:8088/images/create", data).then(() => {
-        $("#addImageForm").modal("hide");
+        console.log(data)
+        $("#modal-gallery").modal("toggle");
         showGallery();
     })
 }
@@ -167,4 +189,8 @@ function uploadImage(e) {
             document.getElementById('imgDiv').innerHTML = `<img src="${downloadURL}" alt="">`
             document.getElementById("image").value = downloadURL;
         });
+}
+
+function closeModal(){
+    $("#modal-gallery").modal("hide")
 }
