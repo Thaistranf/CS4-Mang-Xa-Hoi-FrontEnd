@@ -40,13 +40,14 @@ function showProfile() {
   <section class="about__page" id="body-main">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-4">
+      <div class="col-1"></div>
+        <div class="col-lg-3">
           <div class="about__text">
-            <h3 class="about__title">My Profile</h3>
+            <h3 class="about__title"><i class="fa fa-user" aria-hidden="true"></i>My Profile</h3>
             <div class="about__meta avatar-upload">
               <div class="avatar-preview"> 
                <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);"></div>
-               </div>
+            </div>
                <div class="avatar-edit">
                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
                 <label for="imageUpload"></label>
@@ -64,26 +65,27 @@ function showProfile() {
             <img src="/img/signature.png" alt="">
           </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <div class="experience__text">
-            <h3 class="about__title">My Album</h3>
-            <div class="experience__item">
-              <div>Album1</div>
-              
-            </div>
-            <div class="experience__item">
-              
-              <div>Album2</div>
-            </div>
-            <div class="experience__item">
-              
-              <div>Album3</div>
-            </div>
+            <h3 class="about__title"><i class="fa fa-picture-o" aria-hidden="true"></i>My Album</h3>
+            <div class="experience">
+              <ul>
+                  <li>
+                    <a href="#">
+                      <figure>
+                        <img src='https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzNDA0OTI3Nw&ixlib=rb-1.2.1&q=80&w=400' alt='Volcano and lava field against a stormy sky'>
+                        <figcaption>Mountains and volcanos</figcaption>
+                      </figure>
+                    </a>
+                  </li>
+              </ul>
+             </div>
           </div>
-        </div>
+          </div>
+          <div class="col-lg-1"></div>
         <div class="col-lg-4">
           <div class="skills__text">
-            <h3 class="about__title">Skills</h3>
+            <h3 class="about__title"><i class="fa fa-wrench" aria-hidden="true"></i>Skills</h3>
             <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. Vivamus at nibh tincidunt, bibendum ligula id. </p>
             <div class="single-progress-item">
               <h6>Development</h6>
@@ -103,7 +105,7 @@ function showProfile() {
             </div>
           </div>
         </div>
-      </div>
+        
     </div>
   </section>
   <!-- About Page end -->
@@ -174,6 +176,9 @@ async function showFormChangeProfile() {
             format: 'dd/mm/yyyy'
         });
     })
+    $("#imageUpload").change(function() {
+        readURL(this);
+    });
 }
 
 function saveChangeInformation() {
@@ -205,6 +210,4 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-$("#imageUpload").change(function() {
-    readURL(this);
-});
+
