@@ -355,9 +355,7 @@ function updateComments(comments) {
 }
 
 function deleteCommentGallery(id){
-    axios.delete("http://localhost:8088/comments/" + id).then(res => {
-        // showPostDetail()
-        console.log(res.data)
-        updateComments()
+    axios.delete("http://localhost:8088/comments/" + id).then(() => {
+        location.reload()
     })
 }
