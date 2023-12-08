@@ -128,6 +128,7 @@ function showProfile() {
                         <figcaption onclick="">${album[i].name}</figcaption>
                       </figure>
                     </a>
+                    <button type="button" class="btn btn-outline-info" style="height: 30px;font-size: 10px" onclick="">View</button>
                     <button type="button" class="btn btn-outline-success" style="height: 30px;font-size: 10px" onclick="showFormUpdateAlbum(${album[i].id})">Update</button>
                     <button type="button" class="btn btn-outline-danger" style="height: 30px;font-size: 10px">Delete</button>
                     </li>`
