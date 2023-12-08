@@ -88,8 +88,8 @@ function showFormAddNewImage(){
                       <!--Modal header-->
                       <div class="modal-header">
                         <h5 class="modal-title" id="addImageFormLabel"><i class="fa fa-picture-o" aria-hidden="true"></i>New Image</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()">
-                          <i class="fa fa-window-close" aria-hidden="true"></i>
+                          <button type="button" class="close" onclick="closeModalGallery()" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
                         </button>
                       </div>              
                       <!--Modal body-->
@@ -140,6 +140,7 @@ function showFormAddNewImage(){
                 </div>`
     document.getElementById("login-modal").innerHTML=str
     $("#modal-gallery").modal("show");
+
 }
 
 function saveNewImage(){
@@ -184,8 +185,8 @@ function uploadImage(e) {
         });
 }
 
-function closeModal(){
-    $("#modal-gallery").modal("hide")
+function closeModalGallery(){
+    $("#modal-gallery").modal("hide");
 }
 async function showAllCategories(){
     let data = JSON.stringify({

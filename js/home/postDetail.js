@@ -101,8 +101,9 @@ function closeModal(){
 }
 
 function sendComment(idImage){
+    let user = getUser();
     let comment = document.getElementById("inputComment").value
-    if (comment !== ""){
+    if (user && comment !== ""){
         axios.post("http://localhost:8088/comments", {
             description: comment,
             user: {
@@ -111,9 +112,9 @@ function sendComment(idImage){
             image: {
                 id: idImage
             }
-        }).then(() => {
-            // showPostDetail(idImage)
-            location.reload()
+        }).then((response) => {
+            updateComments(response.data)
+            document.getElementById("inputComment").value = '';
         })
     } else {
         alert("Vui lòng nhập comment!!!")
@@ -207,4 +208,16 @@ async function showAllCategories2(){
       </div>
         `
     document.getElementById("showCategories2").innerHTML=html;
+}
+
+function updateComments(comments) {
+    let commentSection = document.querySelector('.box-comment');
+    commentSection.innerHTML = '';
+
+    for (let i = 0; i < comments.length; i++) {
+        commentSection.innerHTML += `
+            <a href="#"><i class="fa fa-user" aria-hidden="true"></i>${comments[i].user.username} </a>
+            <p style="margin: -2px 0 10px 12px; font-size: 11px"> ${comments[i].time}</p>
+            <p> ${comments[i].description}</p>`;
+    }
 }
