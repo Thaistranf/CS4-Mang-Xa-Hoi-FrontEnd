@@ -105,26 +105,27 @@ function closeModalEdit() {
     $("#postDetail-modal").modal("toggle")
 }
 
+
 function sendComment(idImage) {
-function sendComment(idImage){
     let user = getUser();
     let comment = document.getElementById("inputComment").value
     if (comment !== "") {
-    if (user && comment !== ""){
-        axios.post("http://localhost:8088/comments", {
-            description: comment,
-            user: {
-                id: getUser().id
-            },
-            image: {
-                id: idImage
-            }
-        }).then((response) => {
-            updateComments(response.data)
-            document.getElementById("inputComment").value = '';
-        })
-    } else {
-        alert("Vui lòng nhập comment!!!")
+        if (user && comment !== "") {
+            axios.post("http://localhost:8088/comments", {
+                description: comment,
+                user: {
+                    id: getUser().id
+                },
+                image: {
+                    id: idImage
+                }
+            }).then((response) => {
+                updateComments(response.data)
+                document.getElementById("inputComment").value = '';
+            })
+        } else {
+            alert("Vui lòng nhập comment!!!")
+        }
     }
 }
 
@@ -203,7 +204,8 @@ function saveEdit(id) {
     let data = JSON.parse(localStorage.getItem("sendingObj"))
     axios.put("http://localhost:8088/images/edit/" + id, data, getToken()).then(() => {
         console.log(data)
-        $("#postDetailEdit-modal").modal("toggle");
+        $("#postDetailEdit-modal").modal("hide");
+        $("#postDetail-modal").modal("hide");
         showGallery();
     })
     // localStorage.removeItem("sendingObj");
@@ -302,14 +304,15 @@ function backModalEdit() {
 }
 
 function deleteImage(id) {
-    if (confirmDelete()){
+    if (confirmDelete()) {
         axios.delete("http://localhost:8088/images/delete/" + id, getToken()).then(() => {
             showGallery();
             $("#postDetailEdit-modal").modal("toggle");
         })
     }
 }
-function confirmDelete(){
+
+function confirmDelete() {
     var result = confirm("Want to delete?");
     if (result) {
         return true
