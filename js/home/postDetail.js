@@ -57,8 +57,18 @@ function showPostDetail(idImage){
                     for (let i = 0; i < comentList.length; i++) {
                         str += `
                         <a href="#"><i class="fa fa-user" aria-hidden="true"></i>${comentList[i].user.username} </a>
-                        <p style="margin: -2px 0 10px 12px; font-size: 11px"> ${comentList[i].time}</p>
-                        <p> ${comentList[i].description}</p>`
+                        <p style="margin: -2px 0 10px 12px; font-size: 11px"> ${comentList[i].time}</p>                      
+                        <p style="margin-left: 20px"> ${comentList[i].description}</p>`
+                        if (comentList[i].user.id === getUser().id){
+                            str += `<div style="margin: -5px 0 10px 0; font-size: 11px">
+                                 <button type="button" class="btn btn-light" onclick="editCommentGallery()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                 <button type="button" class="btn btn-light" onclick="deleteCommentGallery(${imageData.id})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </div>`
+                        } else {
+                            str += `<div style="margin: -5px 0 10px 0; font-size: 11px">
+                                 <button type="button" class="btn btn-light" onclick="deleteCommentGallery(${imageData.id})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </div>`
+                        }
                     }
                 str += `
                             </div>
@@ -109,10 +119,16 @@ function sendComment(idImage){
                 id: idImage
             }
         }).then(() => {
-            // showPostDetail(idImage)
-            location.reload()
+            showPostDetail(idImage)
+            // location.reload()
         })
     } else {
         alert("Vui lòng nhập comment!!!")
     }
+}
+
+function deleteCommentGallery(idImage){
+    axios.delete("http://localhost:8088/comments/" + idImage).then(() => {
+        showPostDetail()
+    })
 }
