@@ -48,6 +48,7 @@ function showGallery(){
 
                 for (let i = 0; i < dataListImage.length; i++) {
                     html += `
+
                  <div class="col-lg-3 col-md-4 col-sm-6">
                       <a onclick="showPostDetail(${dataListImage[i].id})"  href="javascript:" data-fresco-group="gallery" class="gallery-item">
                         <img src="${dataListImage[i].imageLink}" alt="">
@@ -88,8 +89,8 @@ function showFormAddNewImage(){
                       <!--Modal header-->
                       <div class="modal-header">
                         <h5 class="modal-title" id="addImageFormLabel"><i class="fa fa-picture-o" aria-hidden="true"></i>New Image</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()">
-                          <i class="fa fa-window-close" aria-hidden="true"></i>
+                          <button type="button" class="close" onclick="closeModalGallery()" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
                         </button>
                       </div>              
                       <!--Modal body-->
@@ -118,8 +119,8 @@ function showFormAddNewImage(){
                                             <label for="exampleInput1">Location</label>
                                             <input type="text" class="form-control" id="location" aria-describedby="emailHelp" placeholder="Location">            
                                           </div>
-                                          <div class="form-group">
-                                           <button onclick="showAllCategories()">Categories</button>
+                                          <div class="btn-categories">
+                                           <button onclick="showAllCategories()"><span>Categories</span></button>
         
                                           </div>
                                           <div class="form-group">
@@ -140,6 +141,7 @@ function showFormAddNewImage(){
                 </div>`
     document.getElementById("login-modal").innerHTML=str
     $("#modal-gallery").modal("show");
+
 }
 
 function saveNewImage(){
@@ -184,8 +186,8 @@ function uploadImage(e) {
         });
 }
 
-function closeModal(){
-    $("#modal-gallery").modal("hide")
+function closeModalGallery(){
+    $("#modal-gallery").modal("hide");
 }
 async function showAllCategories(){
     let data = JSON.stringify({
@@ -263,8 +265,8 @@ function backModal(){
                                             <label for="exampleInput1">Location</label>
                                             <input type="text" class="form-control" id="location" aria-describedby="emailHelp" placeholder="Location" value="${data.location}">            
                                           </div>
-                                          <div class="form-group">
-                                           <button onclick="showAllCategories()">Categories</button>
+                                          <div class="btn-categories">
+                                           <button onclick="showAllCategories()"><span>Categories</span></button>
         
                                           </div>
                                           <div class="form-group">
